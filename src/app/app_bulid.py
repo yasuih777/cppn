@@ -37,11 +37,14 @@ class AppBuilder:
             st.link_button("X(Twitter)", "https://twitter.com/yugetsubiostat")
         with st_col[1]:
             st.link_button(
-                "Github", "https://github.com/yasuih777/simulation_significant_test"
+                "Github", "https://github.com/yasuih777/cppn"
             )
 
         st.sidebar.subheader("使い方")
-        st.sidebar.markdown("")
+        st.sidebar.markdown(
+            "1. CPPNモデルのパラメータを設定します\n"
+            "2. 「描画を開始」をクリックし、できた模様を眺めます"
+        )
 
         st.sidebar.subheader("Licence")
         st.sidebar.link_button("MIT Licence", "https://opensource.org/license/mit/")
