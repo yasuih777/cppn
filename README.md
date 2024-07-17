@@ -1,7 +1,7 @@
 # CPPN
 CPPN Ploter is an application for plot CPPN pattern. Used Framework is Streamlit, which is python library.
 
-On browser: [Streamlit Share]
+On browser: [Streamlit Share](https://bxatzebjsgirjl4zmrbpnh.streamlit.app/)
 
 # Requirement
 - Ubuntu 22.04.3 LTS
@@ -32,6 +32,8 @@ make build_python
 # Usage
 ## Streamlit Share
 1. Open browser
+
+open https://bxatzebjsgirjl4zmrbpnh.streamlit.app/
 
 ## Launch application
 1. Launch application
