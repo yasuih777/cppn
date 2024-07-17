@@ -36,9 +36,7 @@ class AppBuilder:
         with st_col[0]:
             st.link_button("X(Twitter)", "https://twitter.com/yugetsubiostat")
         with st_col[1]:
-            st.link_button(
-                "Github", "https://github.com/yasuih777/cppn"
-            )
+            st.link_button("Github", "https://github.com/yasuih777/cppn")
 
         st.sidebar.subheader("使い方")
         st.sidebar.markdown(
@@ -64,24 +62,8 @@ class AppBuilder:
 
             st.subheader("1.1 座標系の設定")
             with st.container(border=True):
-                sparam_body = st.columns(3)
-                with sparam_body[0]:
-                    scale = st.number_input(
-                        "空間座標の境界値",
-                        min_value=1e-10,
-                        value=1.0,
-                        step=1.0,
-                        key="space",
-                    )
-                with sparam_body[1]:
-                    use_cycle = st.checkbox("周期的な模様を作成", key="is-cycle")
-                    if use_cycle:
-                        cycle = st.number_input(
-                            "周期数", min_value=0.0, value=4.0, step=1.0, key="cycle"
-                        )
-                    else:
-                        cycle = 0
-                with sparam_body[2]:
+                sparam_body_1 = st.columns(2)
+                with sparam_body_1[0]:
                     fix_seed = st.checkbox("乱数を固定", key="is_seed")
                     if fix_seed:
                         seed = st.number_input(
@@ -89,6 +71,33 @@ class AppBuilder:
                         )
                     else:
                         seed = None
+                with sparam_body_1[1]:
+                    is_color = st.radio(
+                        "模様の色",
+                        options=["白黒", "色付き"],
+                        horizontal=True,
+                        index=0,
+                        key=f"color_layer",
+                    )
+                    is_color = is_color == "色付き"
+
+                sparam_body_2 = st.columns(2)
+                with sparam_body_2[0]:
+                    use_cycle = st.checkbox("周期的な模様を作成", key="is-cycle")
+                    if use_cycle:
+                        cycle = st.number_input(
+                            "周期数", min_value=0.0, value=4.0, step=1.0, key="cycle"
+                        )
+                    else:
+                        cycle = 0
+                with sparam_body_2[1]:
+                    scale = st.number_input(
+                        "空間座標の境界値",
+                        min_value=1e-10,
+                        value=1.0,
+                        step=1.0,
+                        key="space",
+                    )
 
             self.layer_factory = LayerFactory(seed=seed)
 
@@ -131,10 +140,12 @@ class AppBuilder:
                 go_canvas = st.button("描画を開始", key="is_canvas")
                 if go_canvas:
                     # make canvas
-                    self.layer_factory.create_layer()
-
                     self.modeler = CPPNModeler(
-                        scale, cycle, self.layer_factory.layers, is_radius=is_radius
+                        scale,
+                        cycle,
+                        self.layer_factory,
+                        is_radius=is_radius,
+                        is_color=is_color,
                     )
                     self.modeler.vec2canvas()
 
